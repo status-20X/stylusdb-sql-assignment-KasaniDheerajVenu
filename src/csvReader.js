@@ -1,6 +1,6 @@
-// src/csvReader.js
 
 const fs = require('fs');
+const { parse } = require('json2csv');
 const csv = require('csv-parser');
 
 function readCSV(filePath) {
@@ -19,4 +19,12 @@ function readCSV(filePath) {
     });
 }
 
-module.exports = readCSV;
+function writeCSV(filename, data) {
+    const csv = parse(data);
+    fs.writeFileSync(filename, csv);
+}
+
+module.exports = {
+    readCSV,
+    writeCSV,
+}
